@@ -1,0 +1,22 @@
+if (!(Test-Path .gitignore)) {
+@"
+# Environnement virtuel
+venv/
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+
+# Dossiers d’IDE
+.vscode/
+.idea/
+
+# Autres
+*.log
+"@ | Out-File -Encoding UTF8 .gitignore
+  Write-Host "⚙️  .gitignore créé."
+} else {
+  Write-Host "ℹ️  .gitignore existe déjà, pas écrasé."
+}
+
+data/journal/

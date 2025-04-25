@@ -1,0 +1,9 @@
+ python-docx
+ spacy
+ presidio-analyzer
+ langchain
+ chromadb
+ ollama-python
+ sentence-transformers
+chromadb
+sentence-transformers
