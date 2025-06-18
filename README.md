@@ -38,3 +38,53 @@
 5. Réaliser les **tests d’intégration** et ajuster les prompts.
 6. (Optionnel) Ajouter UI web (Streamlit / FastAPI + React).
 7. Documenter le pipeline et préparer la soutenance.
+
+```mermaid
+graph TD
+    subgraph "📚 Knowledge Ingestion"
+        A[Journal DOCX] --> B[loader.py]
+        B --> C[preprocessor.py]
+        C --> D[Text Chunks]
+    end
+    
+    subgraph "🧠 Agent Memory"
+        D --> E[indexer.py]
+        D --> F[extractor.py]
+        E --> G[Vector Memory<br/>FAISS + Embeddings]
+        F --> H[Entity Memory<br/>NER + PII Detection]
+    end
+    
+    subgraph "🤖 AI Agent Core"
+        I[Ollama LLM<br/>llama3.1:8b] --> J[Reasoning Engine]
+        G -->|Retrieval| J
+        H -->|Context| J
+        J --> K[Report Generation]
+    end
+    
+    subgraph "📝 Agent Output"
+        K --> L[Structured Report]
+        L --> M[Final Document]
+    end
+    
+    subgraph "🔧 Agent Tools"
+        N[SpaCy NLP] --> F
+        O[Presidio Privacy] --> F
+        P[SentenceTransformers] --> E
+        Q[LangChain RAG] --> J
+    end
+    
+    subgraph "🧪 Agent Testing"
+        R[test_*.py] -.-> B
+        R -.-> C
+        R -.-> E
+        R -.-> F
+        R -.-> I
+    end
+    
+    style I fill:#ff9800
+    style J fill:#ff9800
+    style G fill:#2196f3
+    style H fill:#9c27b0
+    style M fill:#4caf50
+    style A fill:#e3f2fd
+```
